@@ -288,8 +288,9 @@ class VitosClient:
         """Query the LangGraph workflow."""
         logger.info(f"User input: {user_input}, Thread ID: {self.config['configurable']['thread_id']}")
 
-        # Perform message safety check  
+        # Perform input message safety check  
         safety_check =  perform_message_safety_check(user_input, X_PAN_INPUT_CHECK_PROFILE_NAME, "INPUT")
+        logger.info(f"Input messages:\n{user_input}\n\nInput safety check:{safety_check}\n\n") 
         if safety_check and safety_check.get("action") != "allow":
             logger.warning(f"Unsafe content detected in input")
             return "I apologize, but unsafe content was detected in the input. For security reasons, I cannot process this request."
