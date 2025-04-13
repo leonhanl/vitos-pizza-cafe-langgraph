@@ -87,9 +87,16 @@ cp .env.example .env
 ## Running the Application
 
 1. Test the installation:
-```bash
-python src/vitos_pizza_cafe.py
-```
+
+   To verify the RAG app:
+   ```bash
+   python src/vitos_pizza_cafe.py
+   ```
+
+   To verify the AIRS API:
+   ```bash
+   python src/panw_airs.py
+   ```
 
 2. Launch the web interface:
 ```bash
