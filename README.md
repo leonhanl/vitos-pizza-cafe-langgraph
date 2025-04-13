@@ -12,16 +12,16 @@ This application demonstrates common attack vectors in Gen AI applications, part
 2. Prompt Injection - System Prompt Leak
 3. Sensitive Information Disclosure - PII Leak
 4. Data Poisoning - Malicious URL in Output
-5. Excessive Agency - Data Destruction
+5. Excessive Agency - Database Data Tampering
 
 ## Prerequisites
 
 - Python 3.11 or higher
 - pip package manager
 - API Keys:
-  - OpenAI API Key
-  - Cohere API Key
-  - Deepseek API Key
+  - OpenAI API Key: Required for text embedding and vector search functionality
+  - Cohere API Key: Required for document reranking
+  - Deepseek API Key: Required for generating responses and executing tool-based actions
   - Palo Alto Networks AI Runtime Security (AIRS) API Key
 - Palo Alto Networks AI Runtime Security (AIRS) API Profiles for both input and output inspection
 
