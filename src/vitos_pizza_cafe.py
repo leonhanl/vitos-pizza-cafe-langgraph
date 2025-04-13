@@ -16,15 +16,13 @@ from langchain_core.messages import HumanMessage, AIMessage, SystemMessage, Base
 from langchain_core.prompts import PromptTemplate
 
 # LangChain components
-from langchain.chains import RetrievalQA
-from langchain.memory import ConversationBufferMemory
 from langchain.text_splitter import (
     MarkdownHeaderTextSplitter,
     RecursiveCharacterTextSplitter
 )
 
 # LangChain integrations
-from langchain_openai import OpenAIEmbeddings, ChatOpenAI
+from langchain_openai import OpenAIEmbeddings
 from langchain_deepseek import ChatDeepSeek
 from langchain_community.vectorstores import FAISS
 from langchain_community.document_loaders import TextLoader
@@ -34,12 +32,6 @@ from langgraph.graph import StateGraph, END
 from langgraph.prebuilt import ToolNode
 from langgraph.checkpoint.memory import MemorySaver
 
-from langchain_community.tools.sql_database.tool import (
-    InfoSQLDatabaseTool,
-    ListSQLDatabaseTool,
-    QuerySQLCheckerTool,
-    QuerySQLDatabaseTool,
-)
 from langgraph.prebuilt import ToolNode, tools_condition
 from langchain_community.agent_toolkits.sql.toolkit import SQLDatabaseToolkit
 
