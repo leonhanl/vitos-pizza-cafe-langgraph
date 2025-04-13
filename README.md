@@ -52,6 +52,7 @@ The application consists of the following components:
     - chunking based on markdown tags
     - FAISS vector store
     - similarity search and reranking based on cohere models
+- SQLite Database
 - Database integration using langchain bind tools
 - Streamlit-based web interface
 - AIRS integration for security monitoring
