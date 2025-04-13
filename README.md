@@ -139,7 +139,7 @@ To test the application without AIRS protection:
 
 To enable AIRS protection:
 
-1. Uncomment the following lines in the code:
+1. Uncomment the following lines in vitos_pizza_cafe.py:
    - Line 217: `@check_message_safety`
    - Lines 283-287:
      ```python
