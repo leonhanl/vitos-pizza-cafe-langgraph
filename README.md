@@ -193,9 +193,9 @@ To enable AIRS protection:
      ```
 
 2. Restart the Streamlit application:
-```bash
-streamlit run src/app.py
-```
+   ```bash
+   streamlit run src/app.py
+   ```
 
 ## Security Features
 
