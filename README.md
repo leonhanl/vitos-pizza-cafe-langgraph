@@ -96,6 +96,10 @@ python src/vitos_pizza_cafe.py
 streamlit run ./src/app.py
 ```
 
+3. Input some common question:
+   > What's on the meunu?
+
+   > Do you deliver？
 ## Security Testing
 
 ### Test cases
@@ -128,9 +132,7 @@ To test the application without AIRS protection:
 1. Run the application as described above
 2. Test various attack vectors to observe system behavior
 3. Note the system's responses to different types of attacks
-
-
-
+> **NOTE:** **Do use a new conversation for each attack to ensure consistent output from the LLM.**
 
 
 ### With AIRS Protection
