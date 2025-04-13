@@ -67,7 +67,7 @@ logging.getLogger("langgraph").setLevel(logging.WARNING)
 required_env_vars = [
     "OPENAI_API_KEY",
     "COHERE_API_KEY",
-    "LANGSMITH_API_KEY"
+    "DEEPSEEK_API_KEY"
 ]
 
 missing_vars = [var for var in required_env_vars if not os.getenv(var)]
