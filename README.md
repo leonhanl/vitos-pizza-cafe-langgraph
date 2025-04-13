@@ -31,6 +31,17 @@ This application demonstrates common attack vectors in Gen AI applications, part
     
 ![Application Architecture](docs/diagrams/app-archi.png)
 
+### Message Processing Flow
+
+1. User submits a query through the Chatbot Web UI
+2. The Chatbot Web UI securely forwards the query to the application
+3. The application performs security checks on the input
+4. Relevant documents are retrieved from the vector store based on the query
+5. The application sends the query and contextual data to the LLM
+6. The LLM queries the external database for customer information
+7. A response is generated using both vector store and database information
+8. The response undergoes security validation before being sent to the user
+
 ### Core Components
 
 The application consists of the following components:
@@ -45,16 +56,6 @@ The application consists of the following components:
 - Streamlit-based web interface
 - AIRS integration for security monitoring
 
-### Message Processing Flow
-
-1. User submits a query through the Chatbot Web UI
-2. The Chatbot Web UI securely forwards the query to the application
-3. The application performs security checks on the input
-4. Relevant documents are retrieved from the vector store based on the query
-5. The application sends the query and contextual data to the LLM
-6. The LLM queries the external database for customer information
-7. A response is generated using both vector store and database information
-8. The response undergoes security validation before being sent to the user
 
 ## Installation Guide
 
