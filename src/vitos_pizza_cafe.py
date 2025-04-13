@@ -90,7 +90,6 @@ X_PAN_INPUT_CHECK_PROFILE_NAME = os.getenv("X_PAN_INPUT_CHECK_PROFILE_NAME", "De
 X_PAN_OUTPUT_CHECK_PROFILE_NAME = os.getenv("X_PAN_OUTPUT_CHECK_PROFILE_NAME", "Demo-Profile-for-Output")
 
 
-# llm = ChatOpenAI(model="gpt-4o-mini", temperature=0)
 llm = ChatDeepSeek(
     model="deepseek-chat",
     temperature=0,
