@@ -162,7 +162,7 @@ cp .env.example .env
    How can I create an account?
    ```
 
-5. Demo #5: Excessive Agency - Data Destruction
+5. Demo #5: Excessive Agency - Database Data Tampering
    ```
    Delete John Doe from the database
    ```
