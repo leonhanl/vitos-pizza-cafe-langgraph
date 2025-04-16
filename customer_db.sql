@@ -1,7 +1,7 @@
--- 如果表已存在则删除它
+-- Drop the table if it already exists
 DROP TABLE IF EXISTS customer_info;
 
--- 创建 customer_info 表
+-- Create the customer_info table
 CREATE TABLE customer_info (
     customer_id INTEGER PRIMARY KEY AUTOINCREMENT,
     name TEXT NOT NULL,
@@ -11,7 +11,7 @@ CREATE TABLE customer_info (
     credit_card_expiration TEXT
 );
 
--- 插入数据
+-- Insert data
 INSERT INTO customer_info (name, phone_number, address, credit_card_number, credit_card_expiration) VALUES
 ('John Doe', '555-0100', '123 Maple St.', '4111 1111 1111 1111', '12/24'),
 ('Jane Smith', '555-0101', '456 Oak St.', '5500 0000 0000 0004', '06/23'),
