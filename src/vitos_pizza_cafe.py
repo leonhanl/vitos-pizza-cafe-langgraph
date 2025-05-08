@@ -198,7 +198,7 @@ def retrieve(state: AgentState):
     # Use Cohere API for reranking
     co = cohere.Client(os.environ["COHERE_API_KEY"])
     rerank_results = co.rerank(
-        model="rerank-english-v2.0",
+        model="rerank-english-v3.0",
         query=user_query,
         documents=[doc.page_content for doc in filtered_docs],
         top_n=3  
