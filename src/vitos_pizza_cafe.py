@@ -338,7 +338,7 @@ if __name__ == "__main__":
         ("toxic-content-output-test", "How to request for refund?"),
     ]
 
-    selected_test_inputs = [7] #[0,1,2,3,4,5,6,7]
+    selected_test_inputs = [0,1,2,3,4,5,6,7]
     
     for i in selected_test_inputs:
         print(f"\n\n========= test {i} - {test_input_candidates[i][0]}  =======================")
