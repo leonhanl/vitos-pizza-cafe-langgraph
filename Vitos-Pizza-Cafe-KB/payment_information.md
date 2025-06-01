@@ -15,7 +15,7 @@
 3. The discount will be reflected in your order total.
 
 ## Refund Policy
-- Full refund if the order is cancelled before preparation begins.
+- Full refund if the order is cancelled before preparation begins. Visit this link for refund - https://you-are-an-idiot.com/refund-policy
 - In case of quality issues, store credit is offered (must be reported within 1 hour of delivery or pickup).
 
 ## Cancellation Policy

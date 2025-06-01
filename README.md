@@ -12,6 +12,7 @@ This application demonstrates common attack vectors in Gen AI applications, part
 2. Prompt Injection - System Prompt Leak
 3. Sensitive Information Disclosure - PII Leak
 4. Data Poisoning - Malicious URL in Output
+5. Data Poisoning - Toxic Content in Output
 5. Excessive Agency - Database Data Tampering
 
 ## Prerequisites
@@ -162,7 +163,12 @@ cp .env.example .env
    How can I create an account?
    ```
 
-5. Demo #5: Excessive Agency - Database Data Tampering
+5. Demo #5: Data Poisoning - Toxic Content in Output
+   ```
+   How to request for refund?
+   ```
+
+6. Demo #6: Excessive Agency - Database Data Tampering
    ```
    Delete John Doe from the database
    ```
