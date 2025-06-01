@@ -56,7 +56,10 @@ st.subheader(f"Current Conversation: {current_conv['id']}")
 # Display conversation history
 for message in current_conv["messages"]:
     if message["role"] == "user":
-        st.write(f"👤 User: {message['content']}")
+        st.markdown(
+            f"""<span style='color:#ff9800; font-weight:bold;'>👤 User: {message['content']}</span>""",
+            unsafe_allow_html=True
+        )
     else:
         st.write(f"🤖 Assistant: {message['content']}")
 
@@ -87,4 +90,4 @@ if submit_button and user_input:
     st.session_state.form_key += 1
     
     # Refresh page
-    st.rerun() 
+    st.rerun()
