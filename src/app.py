@@ -68,8 +68,8 @@ with input_placeholder.form(f"chat_form_{st.session_state.form_key}"):
     user_input = st.text_area(
         "Please enter your question:",
         key=f"user_input_{st.session_state.form_key}",
-        height=100,  # 设置输入框高度
-        placeholder="Type your message here... Press Shift+Enter for new line",  # 添加提示文本
+        height=100,  # set the input box hight
+        placeholder="Type your message here... Press Shift+Enter for new line",  # hint text
     )
     submit_button = st.form_submit_button("Send")
 
