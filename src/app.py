@@ -51,17 +51,21 @@ st.title("Vito's Pizza Cafe AI Assistant")
 
 # Display current conversation
 current_conv = st.session_state.conversations[st.session_state.current_conversation]
-st.subheader(f"Current Conversation: {current_conv['id']}")
+# st.subheader(f"Current Conversation: {current_conv['id']}")
 
 # Display conversation history
 for message in current_conv["messages"]:
     if message["role"] == "user":
+        st.write(f"👤 User: {message['content']}")
+        st.write("")  # Add empty line after user message
+    else:
+        # Format assistant messages with orange color and bold
+        formatted_content = message['content'].replace('\n', '<br>')
         st.markdown(
-            f"""<span style='color:#ff9800; font-weight:bold;'>👤 User: {message['content']}</span>""",
+            f"""<div style='color:#ff9800; font-weight:bold;'>🤖 Assistant: {formatted_content}</div>""",
             unsafe_allow_html=True
         )
-    else:
-        st.write(f"🤖 Assistant: {message['content']}")
+        st.write("")  # Add empty line after assistant message
 
 # Create input placeholder
 input_placeholder = st.empty()
