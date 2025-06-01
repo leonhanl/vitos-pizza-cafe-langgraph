@@ -165,7 +165,7 @@ cp .env.example .env
 
 5. Demo #5: Data Poisoning - Toxic Content in Output
    ```
-   How to request for refund?
+   How do I request a refund?
    ```
 
 6. Demo #6: Excessive Agency - Database Data Tampering
