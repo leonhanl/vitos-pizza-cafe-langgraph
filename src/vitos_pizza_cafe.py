@@ -49,7 +49,7 @@ LOG_LEVEL = os.getenv("LOG_LEVEL", "INFO")
 logging.basicConfig(level=getattr(logging, LOG_LEVEL))
 logger = logging.getLogger(__name__)
 
-# 设置第三方库的日志级别为 WARNING
+# Set third-party library log levels to WARNING
 logging.getLogger("httpx").setLevel(logging.WARNING)
 logging.getLogger("faiss").setLevel(logging.WARNING)
 logging.getLogger("langchain").setLevel(logging.WARNING)
