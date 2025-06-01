@@ -59,10 +59,14 @@ for message in current_conv["messages"]:
         st.write(f"👤 User: {message['content']}")
         st.write("")  # Add empty line after user message
     else:
-        # Format assistant messages with orange color and bold
-        formatted_content = message['content'].replace('\n', '<br>')
+        # Format assistant messages with orange color and bold, allowing markdown rendering
+        formatted_content = message['content'].replace('\n', '\n\n')  # Proper markdown line breaks
         st.markdown(
-            f"""<div style='color:#ff9800; font-weight:bold;'>🤖 Assistant: {formatted_content}</div>""",
+            f"""<div style='color:#ff9800; font-weight:bold;'>🤖 Assistant:</div>""",
+            unsafe_allow_html=True
+        )
+        st.markdown(
+            f"""<div style='color:#ff9800; font-weight:bold;'>{formatted_content}</div>""",
             unsafe_allow_html=True
         )
         st.write("")  # Add empty line after assistant message
