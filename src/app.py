@@ -66,7 +66,7 @@ for message in current_conv["messages"]:
             unsafe_allow_html=True
         )
         st.markdown(
-            f"""<div style='color:#ff9800; font-weight:bold;'>{formatted_content}</div>""",
+            f"""<div style='color:#ff9800;'>{formatted_content}</div>""",
             unsafe_allow_html=True
         )
         st.write("")  # Add empty line after assistant message
