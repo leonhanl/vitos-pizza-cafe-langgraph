@@ -20,8 +20,7 @@ This application demonstrates common attack vectors in Gen AI applications, part
 - Python 3.11 or higher
 - pip package manager
 - API Keys:
-  - OpenAI API Key: Required for text embedding and vector search functionality
-  - Cohere API Key: Required for document reranking
+  - Cohere API Key: Required for text embedding and document reranking
   - Deepseek API Key: Required for generating responses and executing tool-based actions
   - Palo Alto Networks AI Runtime Security (AIRS) API Key
 - Palo Alto Networks AI Runtime Security (AIRS) API Profiles for both input and output inspection
@@ -52,7 +51,7 @@ The application consists of the following components:
 - RAG system for information retrieval
     - chunking based on markdown tags
     - FAISS vector store
-    - similarity search and reranking based on cohere models
+    - similarity search and reranking based on Cohere models
 - SQLite Database
 - Database integration using langchain bind tools
 - Streamlit-based web interface
@@ -85,6 +84,7 @@ pip install -r requirements.txt
 ```bash
 cp .env.example .env
 # Edit .env with your API keys and configuration
+# Cohere API Key is required for both embedding and reranking
 ```
 
 ## Running the Application

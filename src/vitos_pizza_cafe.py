@@ -22,10 +22,10 @@ from langchain.text_splitter import (
 )
 
 # LangChain integrations
-from langchain_openai import OpenAIEmbeddings
 from langchain_deepseek import ChatDeepSeek
 from langchain_community.vectorstores import FAISS
 from langchain_community.document_loaders import TextLoader
+from langchain_cohere import CohereEmbeddings  
 
 # LangGraph
 from langgraph.graph import StateGraph, END
@@ -57,7 +57,6 @@ logging.getLogger("langgraph").setLevel(logging.WARNING)
 
 # Check required environment variables
 required_env_vars = [
-    "OPENAI_API_KEY",
     "COHERE_API_KEY",
     "DEEPSEEK_API_KEY"
 ]
@@ -71,7 +70,6 @@ if missing_vars:
     )
 
 # Configure API keys
-os.environ["OPENAI_API_KEY"] = os.getenv("OPENAI_API_KEY")
 os.environ["DEEPSEEK_API_KEY"] = os.getenv("DEEPSEEK_API_KEY")
 os.environ["COHERE_API_KEY"] = os.getenv("COHERE_API_KEY")
 os.environ["LANGSMITH_TRACING"] = os.getenv("LANGSMITH_TRACING", "false")
@@ -135,13 +133,14 @@ def chunk_documents(documents) -> List[str]:
 def setup_knowledge_base(directory_path: str) -> FAISS:
     """Process markdown documents and create a vector store."""
     index_file_path = os.path.join(directory_path, "faiss_index")
+    embeddings = CohereEmbeddings(model="embed-english-v3.0", cohere_api_key=os.environ["COHERE_API_KEY"]) 
     if os.path.exists(index_file_path):
         logger.info("Loading existing index...")
-        vector_store = FAISS.load_local(index_file_path, OpenAIEmbeddings(), allow_dangerous_deserialization=True)
+        vector_store = FAISS.load_local(index_file_path, embeddings, allow_dangerous_deserialization=True)
     else:
         docs = load_documents(directory_path)
         chunked_docs = chunk_documents(docs)
-        vector_store = FAISS.from_documents(chunked_docs, OpenAIEmbeddings())
+        vector_store = FAISS.from_documents(chunked_docs, embeddings)
         vector_store.save_local(index_file_path)
         logger.info(f"Index saved to {index_file_path}")
     return vector_store
@@ -188,11 +187,11 @@ def retrieve(state: AgentState):
     # Get documents and their similarity scores
     docs_with_scores = vector_store.similarity_search_with_score(user_query, k=5)
     
-    # Filter results with similarity score less than 0.5
-    filtered_docs = [doc for doc, score in docs_with_scores if score < 0.5]
+    # Filter results with similarity score less than a threshold (e.g., 2.0), as the similarity score range is not determined, so it's a task todo.
+    filtered_docs = [doc for doc, score in docs_with_scores]
     
-    # If no documents or document count <= 3, return directly
-    if not filtered_docs or len(filtered_docs) <= 3:
+    # If no documents, return directly
+    if not docs_with_scores:
         return {"messages": [SystemMessage(content="No relevant context found from the knowledge base.")]}
 
     # Use Cohere API for reranking
