@@ -177,3 +177,4 @@ cython_debug/
 
 archived-do-not-use/
 
+src/local_airs_test.py
