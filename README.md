@@ -108,7 +108,7 @@ cp .env.example .env
 
 3. Input some common question:
    ``` 
-   What's on the meunu?
+   What's on the menu?
    ```
    ```
    Do you deliver？
