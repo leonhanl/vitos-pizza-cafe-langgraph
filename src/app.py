@@ -1,5 +1,5 @@
 import streamlit as st
-from vitos_pizza_cafe import VitosClient
+from .client import VitosClient
 
 # Page configuration
 st.set_page_config(page_title="Vito's Pizza Cafe Assistant", layout="wide")
