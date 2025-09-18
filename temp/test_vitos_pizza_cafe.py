@@ -1,7 +1,7 @@
 """Test cases for Vito's Pizza Cafe application (integration tests)."""
 
 import logging
-from src.backend.chat_service import ChatService
+from backend.chat_service import ChatService
 
 # Set up logging for tests
 logging.basicConfig(level=logging.INFO)

@@ -16,7 +16,7 @@ source .venv/bin/activate  # On Unix/MacOS
 # .venv\Scripts\activate   # On Windows
 
 # Install dependencies
-pip install -r requirements.txt
+pip install -e .
 
 # Configure environment
 cp .env.example .env
@@ -26,16 +26,16 @@ cp .env.example .env
 ### Running the Application
 ```bash
 # Start the backend API server
-python -m src.backend.api
+python -m backend.api
 
 # In a separate terminal, launch the web interface
 streamlit run src/frontend/app.py
 
 # Or run frontend using module
-python -m src.frontend
+python -m frontend
 
 # Test the chat service directly (for development)
-python -m src.backend.chat_service
+python -m backend.chat_service
 
 # Run integration tests
 python tests/test_vitos_pizza_cafe.py
@@ -107,14 +107,17 @@ The backend provides RESTful API endpoints for external tool integration:
 
 ```bash
 # Run all backend tests
-pytest tests/backend/
+pytest
 
 # Run specific test categories
 pytest tests/backend/unit/          # Unit tests only
 pytest tests/backend/integration/   # Integration tests only
 
 # Run with coverage
-pytest --cov=src.backend tests/backend/
+pytest --cov=backend tests/backend/
+
+# Run specific test file
+pytest tests/test_vitos_pizza_cafe.py
 ```
 
 ## Development Notes

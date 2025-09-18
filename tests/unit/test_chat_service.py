@@ -4,7 +4,7 @@ import pytest
 from unittest.mock import Mock, patch, MagicMock
 from langchain_core.messages import HumanMessage, AIMessage
 
-from src.backend.chat_service import ChatService, get_or_create_chat_service, delete_conversation
+from backend.chat_service import ChatService, get_or_create_chat_service, delete_conversation
 
 
 class TestChatService:
@@ -20,9 +20,9 @@ class TestChatService:
         assert self.chat_service.conversation_id == self.conversation_id
         assert self.chat_service.conversation_history == []
 
-    @patch('src.backend.chat_service.retrieve_context')
-    @patch('src.backend.chat_service.get_database_tools')
-    @patch('src.backend.chat_service.create_react_agent')
+    @patch('backend.chat_service.retrieve_context')
+    @patch('backend.chat_service.get_database_tools')
+    @patch('backend.chat_service.create_react_agent')
     def test_process_query_success(self, mock_create_agent, mock_get_tools, mock_retrieve_context):
         """Test successful query processing."""
         # Mock dependencies
@@ -56,7 +56,7 @@ class TestChatService:
         assert isinstance(self.chat_service.conversation_history[0], HumanMessage)
         assert isinstance(self.chat_service.conversation_history[1], AIMessage)
 
-    @patch('src.backend.chat_service.retrieve_context')
+    @patch('backend.chat_service.retrieve_context')
     def test_process_query_error_handling(self, mock_retrieve_context):
         """Test error handling in query processing."""
         # Mock exception
@@ -110,9 +110,12 @@ class TestChatService:
             self.chat_service.conversation_history.append(HumanMessage(content=f"Message {i}"))
 
         # Simulate processing a query (this triggers history trimming)
-        with patch('src.backend.chat_service.retrieve_context'), \
-             patch('src.backend.chat_service.get_database_tools'), \
-             patch('src.backend.chat_service.create_react_agent') as mock_create_agent:
+        with patch('backend.chat_service.retrieve_context'), \
+             patch('backend.chat_service.get_database_tools') as mock_get_db_tools, \
+             patch('backend.chat_service.create_react_agent') as mock_create_agent:
+
+            # Mock the database tools to return (tools, llm) tuple
+            mock_get_db_tools.return_value = ([], Mock())
 
             # Mock the agent response
             mock_agent = Mock()
@@ -131,7 +134,7 @@ class TestChatServiceGlobalFunctions:
 
     def setup_method(self):
         """Clean up conversations before each test."""
-        from src.backend.chat_service import _conversations
+        from backend.chat_service import _conversations
         _conversations.clear()
 
     def test_get_or_create_chat_service_new(self):

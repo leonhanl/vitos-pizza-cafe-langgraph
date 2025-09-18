@@ -4,7 +4,7 @@ import pytest
 from fastapi.testclient import TestClient
 from unittest.mock import patch, Mock
 
-from src.backend.api import app
+from backend.api import app
 
 
 class TestVitosAPI:
@@ -30,7 +30,7 @@ class TestVitosAPI:
         assert data["status"] == "healthy"
         assert "running" in data["message"]
 
-    @patch('src.backend.api.get_or_create_chat_service')
+    @patch('backend.api.get_or_create_chat_service')
     def test_chat_endpoint_success(self, mock_get_service):
         """Test successful chat request."""
         # Mock chat service
@@ -53,7 +53,7 @@ class TestVitosAPI:
         mock_get_service.assert_called_once_with("test_conversation")
         mock_service.process_query.assert_called_once_with("Hello")
 
-    @patch('src.backend.api.get_or_create_chat_service')
+    @patch('backend.api.get_or_create_chat_service')
     def test_chat_endpoint_default_conversation(self, mock_get_service):
         """Test chat request with default conversation ID."""
         mock_service = Mock()
@@ -77,7 +77,7 @@ class TestVitosAPI:
 
         assert response.status_code == 422  # Validation error
 
-    @patch('src.backend.api.get_or_create_chat_service')
+    @patch('backend.api.get_or_create_chat_service')
     def test_chat_endpoint_service_error(self, mock_get_service):
         """Test chat endpoint when service throws error."""
         mock_service = Mock()
@@ -91,7 +91,7 @@ class TestVitosAPI:
 
         assert response.status_code == 500
 
-    @patch('src.backend.api.list_conversations')
+    @patch('backend.api.list_conversations')
     def test_get_conversations(self, mock_list_conversations):
         """Test getting conversations list."""
         mock_list_conversations.return_value = ["conv1", "conv2", "conv3"]
@@ -102,7 +102,7 @@ class TestVitosAPI:
         data = response.json()
         assert data == ["conv1", "conv2", "conv3"]
 
-    @patch('src.backend.api.get_or_create_chat_service')
+    @patch('backend.api.get_or_create_chat_service')
     def test_get_conversation_history(self, mock_get_service):
         """Test getting conversation history."""
         mock_service = Mock()
@@ -119,7 +119,7 @@ class TestVitosAPI:
         assert len(data["messages"]) == 1
         assert data["messages"][0]["user"] == "Hello"
 
-    @patch('src.backend.api.delete_conversation')
+    @patch('backend.api.delete_conversation')
     def test_delete_conversation_success(self, mock_delete):
         """Test successful conversation deletion."""
         mock_delete.return_value = True
@@ -131,7 +131,7 @@ class TestVitosAPI:
         assert "deleted successfully" in data["message"]
         mock_delete.assert_called_once_with("test_conv")
 
-    @patch('src.backend.api.delete_conversation')
+    @patch('backend.api.delete_conversation')
     def test_delete_conversation_not_found(self, mock_delete):
         """Test deleting non-existent conversation."""
         mock_delete.return_value = False
@@ -140,7 +140,7 @@ class TestVitosAPI:
 
         assert response.status_code == 404
 
-    @patch('src.backend.api.get_or_create_chat_service')
+    @patch('backend.api.get_or_create_chat_service')
     def test_clear_conversation_history(self, mock_get_service):
         """Test clearing conversation history."""
         mock_service = Mock()
@@ -162,7 +162,7 @@ class TestVitosAPI:
         """Test chat endpoint with large message."""
         large_message = "A" * 10000  # 10KB message
 
-        with patch('src.backend.api.get_or_create_chat_service') as mock_get_service:
+        with patch('backend.api.get_or_create_chat_service') as mock_get_service:
             mock_service = Mock()
             mock_service.process_query.return_value = "Processed large message"
             mock_get_service.return_value = mock_service
