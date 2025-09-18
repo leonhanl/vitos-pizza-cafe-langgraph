@@ -93,7 +93,7 @@ cp .env.example .env
 
    To verify the RAG app:
    ```bash
-   python src/vitos_pizza_cafe.py
+   python -m src.backend.api
    ```
 
    To verify the AIRS API:
@@ -103,7 +103,7 @@ cp .env.example .env
 
 2. Launch the web interface:
    ```bash
-   streamlit run ./src/app.py
+   streamlit run src/frontend/app.py
    ```
 
 3. Input some common question:
@@ -200,7 +200,7 @@ To enable AIRS protection:
 
 2. Restart the Streamlit application:
    ```bash
-   streamlit run src/app.py
+   streamlit run src/frontend/app.py
    ```
 
 ## Security Features

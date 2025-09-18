@@ -1,7 +1,7 @@
-"""Test cases for Vito's Pizza Cafe application."""
+"""Test cases for Vito's Pizza Cafe application (integration tests)."""
 
 import logging
-from src.client import VitosClient
+from src.backend.chat_service import ChatService
 
 # Set up logging for tests
 logging.basicConfig(level=logging.INFO)
@@ -56,8 +56,8 @@ def test_vitos_pizza_cafe():
 
     for i in selected_test_inputs:
         print(f"\n\n========= test {i} - {test_input_candidates[i][0]}  =======================")
-        client = VitosClient(thread_id=test_input_candidates[i][0])
-        print("answer: ", client.query(test_input_candidates[i][1]))
+        client = ChatService(conversation_id=test_input_candidates[i][0])
+        print("answer: ", client.process_query(test_input_candidates[i][1]))
 
 if __name__ == "__main__":
     test_vitos_pizza_cafe()

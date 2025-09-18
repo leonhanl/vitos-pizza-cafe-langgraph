@@ -1,5 +1,10 @@
 import streamlit as st
-from .client import VitosClient
+import logging
+from .api_client import VitosApiClient
+
+# Set up logging
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
 
 # Page configuration
 st.set_page_config(page_title="Vito's Pizza Cafe Assistant", layout="wide")
@@ -17,8 +22,10 @@ if "current_conversation" not in st.session_state:
     st.session_state.current_conversation = 0
 if "form_key" not in st.session_state:
     st.session_state.form_key = 0
-if "client" not in st.session_state:
-    st.session_state.client = VitosClient(thread_id=str(st.session_state.current_conversation))
+if "api_client" not in st.session_state:
+    st.session_state.api_client = VitosApiClient()
+if "backend_status" not in st.session_state:
+    st.session_state.backend_status = "unknown"
 
 # Sidebar - Conversation Management
 with st.sidebar:
@@ -35,7 +42,6 @@ with st.sidebar:
             }]
         })
         st.session_state.current_conversation = new_conv_id
-        st.session_state.client = VitosClient(thread_id=str(new_conv_id))
         st.rerun()
     
     # Conversation list
@@ -43,11 +49,24 @@ with st.sidebar:
     for conv in st.session_state.conversations:
         if st.button(f"Conversation {conv['id']}", key=f"conv_{conv['id']}"):
             st.session_state.current_conversation = conv['id']
-            st.session_state.client = VitosClient(thread_id=str(conv['id']))
             st.rerun()
+
+# Backend status check
+if st.session_state.backend_status == "unknown":
+    if st.session_state.api_client.health_check():
+        st.session_state.backend_status = "healthy"
+    else:
+        st.session_state.backend_status = "unhealthy"
 
 # Main interface
 st.title("Vito's Pizza Cafe AI Assistant")
+
+# Show backend status
+if st.session_state.backend_status == "unhealthy":
+    st.error("⚠️ Backend API is not available. Please start the backend server.")
+    st.info("Run: `python -m src.backend.api` to start the backend server.")
+else:
+    st.success("✅ Connected to backend API")
 
 # Display current conversation
 current_conv = st.session_state.conversations[st.session_state.current_conversation]
@@ -88,8 +107,12 @@ if submit_button and user_input:
     # Add user message to history
     current_conv["messages"].append({"role": "user", "content": user_input})
     
-    # Get assistant response
-    response = st.session_state.client.query(user_input)
+    # Get assistant response from API
+    with st.spinner("Thinking..."):
+        response = st.session_state.api_client.chat(
+            message=user_input,
+            conversation_id=str(st.session_state.current_conversation)
+        )
     
     # Add assistant response to history
     current_conv["messages"].append({"role": "assistant", "content": response})

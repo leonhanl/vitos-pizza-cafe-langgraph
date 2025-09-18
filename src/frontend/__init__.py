@@ -1,0 +1,1 @@
+"""Frontend module for Vito's Pizza Cafe application."""
