@@ -103,31 +103,6 @@ class TestChatService:
 
         assert self.chat_service.conversation_history == []
 
-    def test_conversation_history_limit(self):
-        """Test conversation history is limited to 20 messages."""
-        # Add more than 20 messages
-        for i in range(25):
-            self.chat_service.conversation_history.append(HumanMessage(content=f"Message {i}"))
-
-        # Simulate processing a query (this triggers history trimming)
-        with patch('backend.chat_service.retrieve_context'), \
-             patch('backend.chat_service.get_database_tools') as mock_get_db_tools, \
-             patch('backend.chat_service.create_react_agent') as mock_create_agent:
-
-            # Mock the database tools to return (tools, llm) tuple
-            mock_get_db_tools.return_value = ([], Mock())
-
-            # Mock the agent response
-            mock_agent = Mock()
-            mock_result = {"messages": [Mock(content="Test response")]}
-            mock_agent.invoke.return_value = mock_result
-            mock_create_agent.return_value = mock_agent
-
-            self.chat_service.process_query("Test")
-
-        # Should be limited to 20 messages after adding user+assistant messages
-        assert len(self.chat_service.conversation_history) == 20
-
 
 class TestChatServiceGlobalFunctions:
     """Test global functions for chat service management."""

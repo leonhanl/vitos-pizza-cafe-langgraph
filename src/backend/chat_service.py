@@ -51,7 +51,7 @@ class ChatService:
 
             # Add conversation history if provided
             if self.conversation_history:
-                messages.extend(self.conversation_history[-10:])  # Keep last 10 messages
+                messages.extend(self.conversation_history)
 
             # Add current user query
             messages.append(HumanMessage(content=user_input))
@@ -63,10 +63,6 @@ class ChatService:
             # 6. Update conversation history
             self.conversation_history.append(HumanMessage(content=user_input))
             self.conversation_history.append(AIMessage(content=response))
-
-            # Keep conversation history manageable (last 20 messages)
-            if len(self.conversation_history) > 20:
-                self.conversation_history = self.conversation_history[-20:]
 
             logger.debug(f"Generated response: {response[:100]}...")
             return response
