@@ -186,7 +186,7 @@ class TestAPIErrorHandling:
         """Test handling of malformed JSON."""
         response = self.client.post(
             "/api/v1/chat",
-            data="invalid json",
+            content=b"invalid json",
             headers={"content-type": "application/json"}
         )
         assert response.status_code == 422
