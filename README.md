@@ -1,3 +1,11 @@
+
+# Notice
+This repository is no longer maintained. <br>
+Please visit the new Vito's Pizza Cafe sample application at:<br>
+👉 https://github.com/leonhanl/vitos-pizza-cafe  <br>
+The new version adopts a front-end/back-end separation architecture and supports more features.
+
+
 # Vito's Pizza Cafe - AI Customer Service Application
 
 A comprehensive demonstration of a pizza cafe customer service application built with LangGraph and RAG (Retrieval-Augmented Generation). This project showcases various AI security vulnerabilities and their mitigation using Palo Alto Networks AI Runtime Security (AIRS) API.
